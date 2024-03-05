@@ -26,6 +26,9 @@ builder.Services.Register();
 builder.Services.AddJwtAuthentication(builder.Configuration);
 
 var app = builder.Build();
+// app.UseErrorHandlingMiddleware();
+// app.UseSecurityMiddleware();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

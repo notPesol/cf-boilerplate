@@ -22,7 +22,7 @@ public class ProductService : BaseService<Product, DBContext, ProductSearchDTO>
     {
       _query = _query.Where(p => EF.Functions.Like(p.Name, $"%{searchDTO.Query}%"));
     }
-
+    _query = _query.Include(p=>p.Category);
     return base.GetAllAsync(searchDTO);
   }
 

@@ -9312,19 +9312,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/pesol.maiyawut/.nuget/packages/": {}
+    "/Users/dewnok/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/pesol.maiyawut/Desktop/pesol/dotnet-api-projects/ProductApi/ProductApi.csproj",
+      "projectUniqueName": "/Users/dewnok/Desktop/OSProject/cf-boilerplate/ProductApi.csproj",
       "projectName": "ProductApi",
-      "projectPath": "/Users/pesol.maiyawut/Desktop/pesol/dotnet-api-projects/ProductApi/ProductApi.csproj",
-      "packagesPath": "/Users/pesol.maiyawut/.nuget/packages/",
-      "outputPath": "/Users/pesol.maiyawut/Desktop/pesol/dotnet-api-projects/ProductApi/obj/",
+      "projectPath": "/Users/dewnok/Desktop/OSProject/cf-boilerplate/ProductApi.csproj",
+      "packagesPath": "/Users/dewnok/.nuget/packages/",
+      "outputPath": "/Users/dewnok/Desktop/OSProject/cf-boilerplate/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/pesol.maiyawut/.nuget/NuGet/NuGet.Config"
+        "/Users/dewnok/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
