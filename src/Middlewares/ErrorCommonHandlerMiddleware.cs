@@ -1,42 +1,34 @@
 using System.Text.Json;
+using ProductApi.Dtos;
 
-public class ErrorHandlingMiddleware
+namespace ProductApi.Middlewares;
+public class ErrorCommonHandlerMiddleware : IMiddleware
 {
-    private readonly RequestDelegate _next;
 
-    public ErrorHandlingMiddleware(RequestDelegate next)
+  public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+  {
+    try
     {
-        _next = next;
+      await next(context);
     }
-
-    public async Task Invoke(HttpContext context)
+    catch (Exception error)
     {
-        try
-        {
-            // var token = context.Request.Headers.Authorization;
-            // Console.WriteLine($"token1 === {token}");
-            await _next(context);
-        }
-        catch (Exception error)
-        {
-            Console.WriteLine("An unexpected error occurred: {0}", error.Message);
+      Console.WriteLine("An unexpected error occurred: {0}", error.Message);
 
-            context.Response.StatusCode = 500;
-            context.Response.ContentType  = "application/json";
+      context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+      context.Response.ContentType = "application/json";
 
-            // Return a JSON response with error details
-            var errorResponse = new { error = "An unexpected error occurred", details = error.Message };
-            var jsonResponse = JsonSerializer.Serialize(errorResponse);
-            await context.Response.WriteAsync(jsonResponse);
-            return; // Return after writing the response to avoid further processing
-        }
+      // Return a JSON response with error details
+      var response = new ErrorResponseDTO { StatusCode = StatusCodes.Status500InternalServerError, Message = error.Message };
+      await context.Response.WriteAsync(JsonSerializer.Serialize(response));
     }
+  }
 }
 
 public static class ErrorHandlingMiddlewareExtensions
 {
-    public static IApplicationBuilder UseErrorHandlingMiddleware(this IApplicationBuilder builder)
-    {
-        return builder.UseMiddleware<ErrorHandlingMiddleware>();
-    }
+  public static IApplicationBuilder UseErrorHandlingMiddleware(this IApplicationBuilder builder)
+  {
+    return builder.UseMiddleware<ErrorCommonHandlerMiddleware>();
+  }
 }

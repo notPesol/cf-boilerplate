@@ -1,7 +1,5 @@
 using System.Linq.Expressions;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.IdentityModel.Tokens;
 using ProductApi.Dtos;
 using ProductApi.Models;
@@ -13,7 +11,6 @@ public class ProductService : BaseService<Product, DBContext, ProductSearchDTO>
 
   public ProductService(DBContext context) : base(context, context.Set<Product>())
   {
-
   }
 
   public override Task<QueryResult<Product>> GetAllAsync(ProductSearchDTO searchDTO)
@@ -22,7 +19,7 @@ public class ProductService : BaseService<Product, DBContext, ProductSearchDTO>
     {
       _query = _query.Where(p => EF.Functions.Like(p.Name, $"%{searchDTO.Query}%"));
     }
-    _query = _query.Include(p=>p.Category);
+
     return base.GetAllAsync(searchDTO);
   }
 

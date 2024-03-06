@@ -4,6 +4,8 @@ using ProductApi.Models;
 using ProductApi.Services;
 using ProductApi.Dtos;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using ProductApi.Middlewares;
 
 namespace ProductApi.Controllers;
 
@@ -36,8 +38,6 @@ public class ProductController : ControllerBase
   [HttpGet]
   public async Task<ActionResult<QueryResult<Product>>> GetAllAsync([FromQuery] ProductSearchDTO searchDTO)
   {
-    var token = Request.Headers["Authorization"];
-    Console.WriteLine($"token === {token}");
     return Ok(await _service.GetAllAsync(searchDTO));
   }
 
