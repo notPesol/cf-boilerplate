@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using ProductApi;
+using ProductApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -26,14 +26,13 @@ builder.Services.Register();
 builder.Services.AddJwtAuthentication(builder.Configuration);
 
 var app = builder.Build();
-// app.UseErrorHandlingMiddleware();
-// app.UseSecurityMiddleware();
 
+// Register my middlewares
+app.MiddlewareRegister();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-  Console.WriteLine("===IsDevelopment===");
   app.UseSwagger();
   app.UseSwaggerUI();
 }

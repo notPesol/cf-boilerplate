@@ -11,7 +11,6 @@ public class CategoryService : BaseService<Category, DBContext, BaseSearchDTO>
 
   public CategoryService(DBContext context) : base(context, context.Categories)
   {
-
   }
 
   public override Task<QueryResult<Category>> GetAllAsync(BaseSearchDTO searchDTO)

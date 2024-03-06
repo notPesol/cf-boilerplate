@@ -14,13 +14,11 @@ public class DBContext : DbContext
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
     base.OnConfiguring(optionsBuilder);
-    Console.WriteLine("OnConfiguring");
   }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);
-    Console.WriteLine("OnModelCreating");
     modelBuilder.Entity<Product>().HasOne<Category>(p => p.Category).WithMany(c => c.Products).HasForeignKey(p => p.CategoryId);
   }
 }
