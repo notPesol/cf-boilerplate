@@ -19,6 +19,18 @@ public class DBContext : DbContext
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);
-    modelBuilder.Entity<Product>().HasOne<Category>(p => p.Category).WithMany(c => c.Products).HasForeignKey(p => p.CategoryId);
+
+    modelBuilder.Entity<Category>(entity =>
+    {
+      entity.HasKey(e => e.Id);
+    });
+
+    modelBuilder.Entity<Product>(entity =>
+    {
+      entity.HasKey(e => e.Id);
+      entity.HasOne(e => e.Category)
+        .WithMany(c => c.Products)
+        .HasForeignKey(p => p.CategoryId);
+    });
   }
 }
