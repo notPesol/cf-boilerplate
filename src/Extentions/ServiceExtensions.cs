@@ -13,5 +13,6 @@ public static class ServiceExtensions
     services.AddScoped<AuthenticationService>();
     services.AddScoped<ProductService>();
     services.AddScoped<CategoryService>();
+    services.AddScoped<ProductAssociationService>();
   }
 }
